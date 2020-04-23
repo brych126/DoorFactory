@@ -13,9 +13,17 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
+    <!-- mdbootstrap -->
+    <link href="~/lib/mdbootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/mdbootstrap/css/mdb.min.css" />
+    <link href="~/lib/mdbootstrap/css/addons/datatables.min.css" rel="stylesheet" />
+    <link href="~/lib/mdbootstrap/css/style.css" rel="stylesheet" />
+    <!--Css files -->
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 </head>
 <body>
     <header>
@@ -71,7 +79,12 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <!-- mdbootstrap -->
+    <script src="~/lib/mdbootstrap/js/jquery.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/mdb.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/addons/datatables.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/popper.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
