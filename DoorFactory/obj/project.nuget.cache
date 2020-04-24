@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "raOAZ8WF1hllGdwn1Gqp93Wj5AZ4+2u1LEhIl2LPxCOU/d7BahtqiaagLOawsawwrVRdTtQWYimQ5qi8jBQGbw==",
+  "dgSpecHash": "o79RME69AsAJKpMm99y+b7aEJfSSKNQ4+S6P4SxkqmnErm8QqRj8bKGOPpX/wp+j321YM17vOgPuV7QCtoSyug==",
   "success": true,
   "projectFilePath": "D:\\3 курс\\2 семестр\\Курсова робота\\DoorFactory\\DoorFactory\\DoorFactory.csproj",
   "expectedPackageFiles": [
@@ -112,7 +112,9 @@
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.design\\2.2.0\\microsoft.entityframeworkcore.design.2.2.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\2.2.0\\microsoft.entityframeworkcore.inmemory.2.2.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\2.2.0\\microsoft.entityframeworkcore.relational.2.2.0.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.relational.design\\1.1.6\\microsoft.entityframeworkcore.relational.design.1.1.6.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\2.2.0\\microsoft.entityframeworkcore.sqlserver.2.2.0.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver.design\\1.1.6\\microsoft.entityframeworkcore.sqlserver.design.1.1.6.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\2.2.0\\microsoft.entityframeworkcore.tools.2.2.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\2.2.0\\microsoft.extensions.caching.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.extensions.caching.memory\\2.2.0\\microsoft.extensions.caching.memory.2.2.0.nupkg.sha512",

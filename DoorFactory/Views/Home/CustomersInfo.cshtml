@@ -1,0 +1,49 @@
+﻿@model DoorFactory.ViewModels.CustomersViewModel
+<h1 class="mb-3" style="color: #008b8b">Список покупців</h1>
+<table id="dtOrders" class="table table-striped table-bordered table-sm dtDoorTables" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="th-sm">
+                Прізвище
+            </th>
+            <th class="th-sm">
+                Ім'я
+            </th>
+            <th class="th-sm">
+                Пошта
+            </th>
+            <th class="th-sm">
+                Кількість замовлень
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.LastName</td>
+                <td>
+                 @customer.Email
+                </td>
+                <td>@customer.Orders.Count</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    <tr>
+        <th class="th-sm">
+            Прізвище
+        </th>
+        <th class="th-sm">
+            Ім'я
+        </th>
+        <th class="th-sm">
+            Пошта
+        </th>
+        <th class="th-sm">
+            Кількість замовлень
+        </th>
+    </tr>
+    </tfoot>
+</table>

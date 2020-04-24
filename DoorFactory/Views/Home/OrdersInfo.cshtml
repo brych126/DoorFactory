@@ -1,0 +1,77 @@
+﻿@model List<DoorFactory.ViewModels.OrdersViewModel>
+<h1 class="mb-3" style="color: #008b8b">Список замовлень</h1>
+<table id="dtOrders" class="table table-striped table-bordered table-sm dtDoorTables" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th class="th-sm">
+            Дата замовлення
+        </th>
+        <th class="th-sm">
+            Дедлайн замовлення
+        </th>
+        <th class="th-sm">
+            Статус замовлення
+        </th>
+        <th class="th-sm">
+            Покупець
+        </th>
+        <th class="th-sm">
+            Продавець
+        </th>
+        <th class="th-sm">
+            Кількість дверей
+        </th>
+        <th class="th-sm">
+            Сума замовлення
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.Order.OrderDate.Date.ToString("d")</td>
+            <td>@order.Order.PaymentDeadline.Date.ToString("d")</td>
+            <td>
+                @if (order.Order.PaymentStatus == 0)
+                {
+                    <text>Оплачено</text>
+                }
+                else
+                {
+                    <text>Не оплачено</text>
+                }
+            </td>
+            <td>@(order.Order.Customers.Name+" "+@order.Order.Customers.LastName)</td>
+            <td>@(order.Order.Employee.Name+" "+@order.Order.Employee.Surname)</td>
+            <td>@order.DoorsAmount</td>
+            <td>@order.Order.OrderTotalPrice</td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr>
+        <th class="th-sm">
+            Дата замовлення
+        </th>
+        <th class="th-sm">
+            Дедлайн замовлення
+        </th>
+        <th class="th-sm">
+            Оплачено
+        </th>
+        <th class="th-sm">
+            Покупець
+        </th>
+        <th class="th-sm">
+            Продавець
+        </th>
+        <th class="th-sm">
+            Кількість дверей
+        </th>
+        <th class="th-sm">
+            Сума замовлення
+        </th>
+    </tr>
+    </tfoot>
+</table>

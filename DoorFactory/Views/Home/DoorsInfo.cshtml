@@ -1,0 +1,89 @@
+﻿@model DoorFactory.ViewModels.DoorsViewModel
+<h1 class="mb-3" style="color: #008b8b">Список дверей</h1>
+<table id="dtDoors" class="table table-striped table-bordered table-sm dtDoorTables" cellspacing="0" width="100%">
+<thead>
+<tr>
+    <th class="th-sm">
+        Назва дверей
+    </th>
+    <th class="th-sm">
+        Висота
+    </th>
+    <th class="th-sm">
+        Ширина
+    </th>
+    <th class="th-sm">
+        Товщина
+    </th>
+    <th class="th-sm">
+        Ціна
+    </th>
+    <th class="th-sm">
+        Націнка
+    </th>
+    <th class="th-sm">
+        Категорія
+    </th>
+    <th class="th-sm">
+        Колір
+    </th>
+    <th class="th-sm">
+        Стиль
+    </th>
+    <th class="th-sm">
+        Тип відкривання
+    </th>
+</tr>
+</thead>
+<tbody>
+  @foreach (var door in Model.Doors)
+  {
+      <tr>
+          <td>@door.DoorName</td>
+          <td>@door.Height</td>
+          <td>@door.Width</td>
+          <td>@door.Thickness</td>
+          <td>@door.Price</td>
+          <td>@door.Rate</td>
+          <td>@door.DoorsCategories.CategoryName</td>
+          <td>@door.Color.Name</td>
+          <td>@door.StyleTypes.Name</td>
+          <td>@door.OpeningStyles.Name</td>
+      </tr>
+    }
+</tbody>
+<tfoot>
+    <tr>
+        <th class="th-sm">
+            Назва дверей
+        </th>
+        <th class="th-sm">
+            Висота
+        </th>
+        <th class="th-sm">
+            Ширина
+        </th>
+        <th class="th-sm">
+            Товщина
+        </th>
+        <th class="th-sm">
+            Ціна
+        </th>
+        <th class="th-sm">
+            Націнка
+        </th>
+        <th class="th-sm">
+            Категорія
+        </th>
+        <th class="th-sm">
+            Колір
+        </th>
+        <th class="th-sm">
+            Стиль
+        </th>
+        <th class="th-sm">
+            Тип відкривання
+        </th>
+    </tr>
+</tfoot>
+</table>

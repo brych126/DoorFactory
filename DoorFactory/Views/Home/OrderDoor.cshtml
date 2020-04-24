@@ -1,0 +1,92 @@
+﻿<div class="container">
+    <div class="form-row justify-content-center rounded shadow mt-5" style="background-color: #F8F8F8;">
+        <div class="row col-md-12 mb-2">
+            <div class="form-group col-md-4">
+                <label><strong>Висота дверей</strong></label>
+                <input type="number" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label><strong>Ширина дверей</strong></label>
+                <input type="number" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label><strong>Товщина дверей</strong></label>
+                <input type="number" class="form-control">
+            </div>
+        </div>
+        <div class="row col-md-12 mb-2">
+            <div class="form-group col-md-6">
+                <label for="inputCategory"><strong>Категорія дверей</strong></label>
+                <select id="inputCategory" class="form-control">
+                    <option selected>Вхідні</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputColor"><strong>Колір</strong></label>
+                <select id="inputColor" class="form-control">
+                    <option selected>Полісандр чорний</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputOpeningType"><strong>Тип відкриття</strong></label>
+                <select id="inputOpeningType" class="form-control">
+                    <option selected>Розпашні</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputStyle"><strong>Стиль</strong></label>
+                <select id="inputStyle" class="form-control">
+                    <option selected>Барокко</option>
+                    <option>...</option>
+                </select>
+            </div>
+        </div>
+        <div class="row col-md-12 mb-2">
+            <div class="form-group col-md-6">
+                <label for="inputMaterialType"><strong>Виберіть тип матеріалу</strong></label>
+                <select id="inputMaterialType" class="form-control">
+                    <option selected>Дерево</option>
+                    <option>Пластик</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputMaterial"><strong>Виберіть матеріал</strong></label>
+                <select id="inputMaterial" class="form-control">
+                    <option selected>Каштан</option>
+                    <option>Вільха</option>
+                </select>
+            </div>
+        </div>
+        <div class="row col-md-12 mb-2">
+            <div class="form-group col-md-6">
+                <label for="inputlockType"><strong>Виберіть тип замка</strong></label>
+                <select id="inputlockType" class="form-control">
+                    <option selected>Рейковий замок</option>
+                    <option>Циліндровий замок</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputLock"><strong>Виберіть замок</strong></label>
+                <select id="inputLock" class="form-control">
+                    <option selected>Замки рейки Schuring</option>
+                    <option>Циліндр TESA DIN_KK</option>
+                </select>
+            </div>
+        </div>
+        <div class="row col-md-12 mb-2">
+            <div class="form-group col-md-6">
+                <label for="exampleFormControlTextarea1"><strong>Можливо у вас є деякі побажання?</strong></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="resize: none;"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-5">
+        <a class="icon-btn ml-1 rounded col-md-1"><i class="fas fa-cart-plus"></i></a>
+        <a class="icon-btn ml-1 rounded col-md-1 ml-2"><i class="fas fa-plus"></i></a>
+        <a asp-controller="Home" asp-action="CustomerForm" class="icon-btn ml-1 rounded col-md-1 ml-2"><i class="fas fa-file-contract"></i></a>
+    </div>
+</div>

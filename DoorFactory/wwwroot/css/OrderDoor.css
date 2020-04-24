@@ -1,0 +1,35 @@
+﻿.icon-btn {
+    background-color: #F8F8F8;
+    border: none;
+    color: #008b8b !important;
+    padding: 12px 16px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+    .icon-btn:hover {
+        color: RoyalBlue !important;
+    }
+
+.approve {
+    background-color: #F8F8F8;
+    border: none;
+    color: #008b8b !important;
+    padding: 12px 16px;
+    font-size: 55px;
+    cursor: pointer;
+}
+
+    .approve:hover {
+        color: RoyalBlue !important;
+    }
+
+
+.main-icon {
+    background-color: #F8F8F8;
+    border: none;
+    color: RoyalBlue !important;
+    padding: 12px 16px;
+    font-size: 555px;
+    cursor: pointer;
+}
