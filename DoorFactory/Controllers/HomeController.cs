@@ -38,6 +38,38 @@ namespace DoorFactory.Controllers
                 .Include(d => d.OpeningStyles)
                 .Include(d => d.StyleTypes);
             dvm.Doors=new List<Doors>(doors);
+            //var door= new Doors()
+            //{
+            //    DoorName = "Тестові двері",
+            //    Width = 571,
+            //    Height = 2122,
+            //    Thickness = 112,
+            //    Price = 4123,
+            //    Rate = 0.42,
+            //    DoorsCategoriesId = 3,
+            //    OpeningStylesId = 2,
+            //    StyleTypesId = 3,
+            //    ColorId = 6, 
+            //};
+            //var order =new Orders()
+            //{
+            //    OrderDate = Convert.ToDateTime("2020-05-14"),
+            //    PaymentDeadline = Convert.ToDateTime("2020-09-01"),
+            //    PaymentStatus = 0,
+            //    OrderTotalPrice = 11709,
+            //    CustomersId = 6,
+            //    EmployeeId = 6 
+            //};
+            //var orderDetail=new OrderDetails()
+            //{
+            //    Door = door,
+            //    Order = order,
+            //    DoorQuantity = 2
+            //};
+            //_dbContext.Doors.Add(door);
+            //_dbContext.Orders.Add(order);
+            //_dbContext.OrderDetails.Add(orderDetail);
+            //_dbContext.SaveChanges();
             return View(dvm);
         }
 
@@ -70,8 +102,19 @@ namespace DoorFactory.Controllers
             return View(cvm);
         }
 
+        [HttpGet]
         public IActionResult CustomerForm()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CustomerForm(Customers customer)
+        {
+            if (ModelState.IsValid)
+            {
+                return Content(customer.Name +" "+ customer.LastName);
+            }
             return View();
         }
 
