@@ -45,17 +45,11 @@
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
                     <label for="inputMaterialType"><strong>Виберіть тип матеріалу</strong></label>
-                    <select id="inputMaterialType" class="form-control">
-                        <option selected>Дерево</option>
-                        <option>Пластик</option>
-                    </select>
+                    <select id="inputMaterialType" class="form-control" asp-items="Model.MaterialCategories" onchange="myFunction()"></select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputMaterial"><strong>Виберіть матеріал</strong></label>
-                    <select id="inputMaterial" class="form-control">
-                        <option selected>Каштан</option>
-                        <option>Вільха</option>
-                    </select>
+                    <label asp-for="BaseMaterialID"><strong>Виберіть матеріал</strong></label>
+                    <select asp-for="BaseMaterialID" class="form-control" disabled="true"></select>
                 </div>
             </div>
             <div class="row col-md-12 mb-2">
@@ -105,6 +99,12 @@
         </div>
         <div class="row mt-3 mb-5">
             <button type="submit" class="ml-1 btn btn-primary">Submit</button>
+        </div>
+        
+        <div class="row mt-3 mb-5">
+            <div id="test">
+                Hello, Roman!!!
+            </div>
         </div>
 
     </form>

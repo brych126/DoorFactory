@@ -162,6 +162,12 @@ namespace DoorFactory.Controllers
             return View();
         }
 
+        public IEnumerable<Materials> GetMaterials(int ID)
+        {
+            var materials = _dbContext.Materials.Where(m=>m.MaterialCategoryId==ID).ToList();
+            return materials;
+        }
+
         public IActionResult Privacy()
         {
             return View();

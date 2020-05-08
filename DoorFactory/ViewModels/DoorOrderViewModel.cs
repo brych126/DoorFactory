@@ -10,6 +10,8 @@ namespace DoorFactory.ViewModels
     public class DoorOrderViewModel
     {
         public Doors Door { get; set; }
+        public int BaseMaterialID { get; set; }
+        public int LockID { get; set; }
         public SelectList Colors { get; set; }
         public SelectList DoorCategories { get; set; }
         public SelectList OpeningStyles { get; set; }
