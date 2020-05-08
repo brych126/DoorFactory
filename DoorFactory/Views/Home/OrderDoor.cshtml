@@ -44,28 +44,22 @@
             </div>
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
-                    <label for="inputMaterialType"><strong>Виберіть тип матеріалу</strong></label>
-                    <select id="inputMaterialType" class="form-control" asp-items="Model.MaterialCategories" onchange="myFunction()"></select>
+                    <label asp-for="BaseMaterialCategoryID"><strong>Виберіть тип матеріалу</strong></label>
+                    <select class="form-control" asp-for="BaseMaterialCategoryID" asp-items="Model.MaterialCategories" onchange="GetBaseMaterials()"></select>
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="BaseMaterialID"><strong>Виберіть матеріал</strong></label>
-                    <select asp-for="BaseMaterialID" class="form-control" disabled="true"></select>
+                    <select asp-for="BaseMaterialID" asp-items="Model.BaseMaterials" class="form-control" ></select>
                 </div>
             </div>
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
-                    <label for="inputlockType"><strong>Виберіть тип замка</strong></label>
-                    <select id="inputlockType" class="form-control">
-                        <option selected>Рейковий замок</option>
-                        <option>Циліндровий замок</option>
-                    </select>
+                    <label asp-for="LockCategoryID"><strong>Виберіть тип замка</strong></label>
+                    <select asp-for="LockCategoryID" asp-items="Model.LockCategories" class="form-control" onchange="GetLocks()"></select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputLock"><strong>Виберіть замок</strong></label>
-                    <select id="inputLock" class="form-control">
-                        <option selected>Замки рейки Schuring</option>
-                        <option>Циліндр TESA DIN_KK</option>
-                    </select>
+                    <label asp-for="LockID"><strong>Виберіть замок</strong></label>
+                    <select asp-for="LockID" asp-items="Model.Locks" class="form-control"></select>
                 </div>
             </div>
             <div class="row col-md-12 mb-2">

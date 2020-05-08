@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DoorFactory.Models
 {
@@ -11,7 +12,6 @@ namespace DoorFactory.Models
             MaterialsDoor = new HashSet<MaterialsDoor>();
             MatrialInStorage = new HashSet<MatrialInStorage>();
         }
-
         public int MaterialId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

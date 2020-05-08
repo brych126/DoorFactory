@@ -60,12 +60,46 @@ namespace DoorFactory.Controllers
             var materialCategories = new SelectList(materialsCategoriesList, "MaterialCategoryId", "Name");
             var lockCategoriesList = _dbContext.MaterialsCategory.Where(mc => mc.MaterialCategoryId >= 3).ToList();
             var lockCategories = new SelectList(lockCategoriesList, "MaterialCategoryId", "Name");
+            var baseMaterialsList = new List<Materials>();
+            var baseMaterials = new SelectList(materialsCategoriesList, "MaterialId", "Name");
+            var locksList = new List<Materials>();
+            var locks = new SelectList(lockCategoriesList, "MaterialId", "Name");
+            if (model.BaseMaterialCategoryID==0)
+            { 
+                baseMaterialsList = _dbContext.Materials
+                    .Where(m => m.MaterialCategoryId == 1)
+                    .ToList();
+                baseMaterials = new SelectList(baseMaterialsList, "MaterialId", "Name");
+            }
+            else
+            {
+                baseMaterialsList = _dbContext.Materials
+                    .Where(m => m.MaterialCategoryId == model.BaseMaterialCategoryID)
+                    .ToList();
+                baseMaterials = new SelectList(baseMaterialsList, "MaterialId", "Name");
+            }
+            if (model.LockCategoryID == 0)
+            {
+                locksList = _dbContext.Materials
+                    .Where(m => m.MaterialCategoryId == 3)
+                    .ToList();
+                locks = new SelectList(locksList, "MaterialId", "Name");
+            }
+            else
+            {
+                locksList = _dbContext.Materials
+                    .Where(m => m.MaterialCategoryId == model.LockCategoryID)
+                    .ToList();
+                locks = new SelectList(locksList, "MaterialId", "Name");
+            }
             model.Colors = colors;
             model.DoorCategories = doorCategories;
             model.OpeningStyles = openingStyles;
             model.StyleTypes = styleTypes;
             model.MaterialCategories = materialCategories;
             model.LockCategories = lockCategories;
+            model.BaseMaterials = baseMaterials;
+            model.Locks = locks;
         }
         public IActionResult DoorsInfo()
         {

@@ -1,17 +1,35 @@
 ﻿
-function myFunction() {
-    var id = $("#inputMaterialType").val();
+function GetBaseMaterials() {
+    var id = $("#BaseMaterialCategoryID").val();
     $.ajax({
         type: "GET",
         url: "/Home/GetMaterials",
         data: { ID: id },
         cache: false,
         success: function (data) {
-            $('#BaseMaterialID').prop("disabled", false);
             $('#BaseMaterialID').children('option').remove();
             for (index = 0; index < data.length; index++) {
                 $('#BaseMaterialID').append(new Option(data[index].name, data[index].materialId));
             } 
+        },
+        error: function () {
+            alert("Error!");
+        }
+    });
+}
+
+function GetLocks() {
+    var id = $("#LockCategoryID").val();
+    $.ajax({
+        type: "GET",
+        url: "/Home/GetMaterials",
+        data: { ID: id },
+        cache: false,
+        success: function (data) {
+            $('#LockID').children('option').remove();
+            for (index = 0; index < data.length; index++) {
+                $('#LockID').append(new Option(data[index].name, data[index].materialId));
+            }
         },
         error: function () {
             alert("Error!");
