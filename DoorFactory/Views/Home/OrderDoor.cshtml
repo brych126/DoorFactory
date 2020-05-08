@@ -64,8 +64,9 @@
             </div>
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
-                    <label for="exampleFormControlTextarea1"><strong>Можливо у вас є деякі побажання?</strong></label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="resize: none;"></textarea>
+                    <label asp-for="Door.Description"><strong>Можливо у вас є деякі побажання?</strong></label>
+                    <textarea asp-for="Door.Description" class="form-control" rows="3" style="resize: none;"></textarea>
+                    <span asp-validation-for="Door.Description" class="text-danger "></span>
                 </div>
             </div>
         </div>
