@@ -14,13 +14,13 @@ namespace DoorFactory.Controllers
 {
     public class HomeController : Controller
     {
-        DoorsDatabaseContext _dbContext;
-        private ITest _test;
+        private DoorsDatabaseContext _dbContext;
+        private IOrderCreator _orderCreator;
 
-        public HomeController(ITest test)
+        public HomeController(IOrderCreator orderCreator)
         {
             _dbContext=new DoorsDatabaseContext();
-            _test = test;
+            _orderCreator = orderCreator;
         }
         public IActionResult Index()
         {
@@ -40,7 +40,8 @@ namespace DoorFactory.Controllers
         {
             if (ModelState.IsValid)
             {
-                return Content("ВсеОк");
+                _orderCreator.ReadData(model);
+                return RedirectToAction("OrderDoor");
             }
             DoorOrderVMInitializer(model);
             return View(model);
@@ -182,16 +183,16 @@ namespace DoorFactory.Controllers
         [HttpGet]
         public IActionResult CustomerForm()
         {
+            _orderCreator.ResetAllFields();
             return View();
         }
 
         [HttpPost]
         public IActionResult CustomerForm(Customers customer)
         {
-            int storage = _test.Increment();
             if (ModelState.IsValid)
             {
-                return Content(storage.ToString());
+                return Content("Success");
             }
             return View();
         }
