@@ -31,7 +31,7 @@
                     <label asp-for="DeliveryInfo.CityId"><strong>Виберіть регіон</strong></label>
                     <select class="form-control" asp-for="DeliveryInfo.CityId" asp-items="Model.Cities"></select>
                 </div>
-                <div class="form-group col-md-12">
+                <div id="addressBlock" class="form-group col-md-12">
                     <label asp-for="DeliveryInfo.Adress"><strong>Вкажіть адресу</strong></label>
                     <input asp-for="DeliveryInfo.Adress" class="form-control" placeholder="вул. С.Бандери,2, кв.78">
                     <span asp-validation-for="DeliveryInfo.Adress" class="text-danger "></span>

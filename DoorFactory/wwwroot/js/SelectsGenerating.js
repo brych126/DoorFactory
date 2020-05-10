@@ -2,7 +2,8 @@
 function ChangeDeliveryBlockVisibility() {
     if ($("#NeedDelivery").prop("checked") === true) {
         $("#deliveryBlock").show();
-    } else {
+    }
+    else {
         $("#deliveryBlock").hide();
     }
 }

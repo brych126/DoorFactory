@@ -7,6 +7,7 @@ using DoorFactory.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using DoorFactory.Models;
 using DoorFactory.ViewModels;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -191,6 +192,10 @@ namespace DoorFactory.Controllers
         [HttpPost]
         public IActionResult CustomerForm(CustomerDataViewModel model)
         {
+            if (!model.NeedDelivery)
+            {
+              ModelState["DeliveryInfo.Adress"].ValidationState=ModelValidationState.Skipped;
+            }
             if (ModelState.IsValid)
             {
                 return Content("Success");
