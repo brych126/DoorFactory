@@ -40,7 +40,7 @@ namespace DoorFactory.Controllers
         {
             if (ModelState.IsValid)
             {
-                _orderCreator.ReadData(model);
+                _orderCreator.ReadData(model,_dbContext);
                 return RedirectToAction("OrderDoor");
             }
             DoorOrderVMInitializer(model);
@@ -183,18 +183,27 @@ namespace DoorFactory.Controllers
         [HttpGet]
         public IActionResult CustomerForm()
         {
-            _orderCreator.ResetAllFields();
-            return View();
+            var model = new CustomerDataViewModel();
+            CustomerDataVMInitializer(model);
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult CustomerForm(Customers customer)
+        public IActionResult CustomerForm(CustomerDataViewModel model)
         {
             if (ModelState.IsValid)
             {
                 return Content("Success");
             }
-            return View();
+            CustomerDataVMInitializer(model);
+            return View(model);
+        }
+
+        private void CustomerDataVMInitializer(CustomerDataViewModel model)
+        {
+            var citiesList = _dbContext.Cities.ToList();
+            var cities = new SelectList(citiesList, "CityId", "City");
+            model.Cities = cities;
         }
 
         public IEnumerable<Materials> GetMaterials(int ID)

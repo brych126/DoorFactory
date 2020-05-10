@@ -11,6 +11,7 @@ namespace DoorFactory.ViewModels
     public class DoorOrderViewModel
     {
         public Doors Door { get; set; }
+        public OrderDetails OrderDetails { get; set; }
         public int BaseMaterialCategoryID { get; set; }
         public int BaseMaterialID { get; set; }
         public int LockCategoryID { get; set; }

@@ -23,7 +23,7 @@
             </div>
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
-                    <label asp-for="DoorCategories"><strong>Категорія дверей</strong></label>
+                    <label asp-for="Door.DoorsCategoriesId"><strong>Категорія дверей</strong></label>
                     <select asp-for="Door.DoorsCategoriesId" asp-items="Model.DoorCategories" class="form-control"></select>
                     <span asp-validation-for="Door.DoorsCategoriesId" class="text-danger "></span>
                 </div>
@@ -33,12 +33,12 @@
                     <span asp-validation-for="Door.ColorId" class="text-danger "></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="OpeningStyles"><strong>Тип відкриття</strong></label>
+                    <label asp-for="Door.OpeningStylesId"><strong>Тип відкриття</strong></label>
                     <select asp-for="Door.OpeningStylesId" asp-items="Model.OpeningStyles" class="form-control"></select>
                     <span asp-validation-for="Door.OpeningStylesId" class="text-danger "></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="StyleTypes"><strong>Стиль</strong></label>
+                    <label asp-for="Door.StyleTypesId"><strong>Стиль</strong></label>
                     <select asp-for="Door.StyleTypesId" asp-items="Model.StyleTypes" class="form-control"></select>
                     <span asp-validation-for="Door.StyleTypesId" class="text-danger "></span>
                 </div>
@@ -63,6 +63,15 @@
                     <select asp-for="LockID" asp-items="Model.Locks" class="form-control"></select>
                 </div>
             </div>
+            
+        <div class="row col-md-12 mb-2">
+            <div class="form-group col-md-4">
+                <label asp-for="OrderDetails.DoorQuantity" class="font-weight-bold">Скільки дверей бажаєте замовити?</label>
+                <input asp-for="OrderDetails.DoorQuantity" class="form-control">
+                <span asp-validation-for="OrderDetails.DoorQuantity" class="text-danger "></span>
+            </div>
+        </div>
+
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
                     <label asp-for="Door.Description"><strong>Можливо у вас є деякі побажання?</strong></label>

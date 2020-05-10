@@ -1,11 +1,13 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
+ using System.ComponentModel.DataAnnotations;
 
-namespace DoorFactory.Models
+ namespace DoorFactory.Models
 {
     public partial class DelieveryInfo
     {
         public int DelieveryInfoId { get; set; }
+        [Required(ErrorMessage = "Поле 'Адреса' є обовязковим")]
         public string Adress { get; set; }
         public DateTime Date { get; set; }
         public short Status { get; set; }

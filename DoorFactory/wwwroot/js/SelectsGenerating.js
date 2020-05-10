@@ -1,4 +1,12 @@
 ﻿
+function ChangeDeliveryBlockVisibility() {
+    if ($("#NeedDelivery").prop("checked") === true) {
+        $("#deliveryBlock").show();
+    } else {
+        $("#deliveryBlock").hide();
+    }
+}
+
 function GetBaseMaterials() {
     var id = $("#BaseMaterialCategoryID").val();
     $.ajax({
@@ -38,7 +46,6 @@ function GetLocks() {
 }
 
 $(document).ready(function () {
-    var person = { firstName: "John", lastName: "Doe", age: 50, eyeColor: "blue" };
     $("#test").click(function () {
         $.ajax({
             type: "GET",

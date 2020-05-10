@@ -1,27 +1,43 @@
-﻿@model Customers
+﻿@model DoorFactory.ViewModels.CustomerDataViewModel
 <div class="container">
     <h1 class="mb-3" style="color: #008b8b">Залиште інформацію про себе</h1>
     <div class="form-row justify-content-center rounded shadow mt-5" style="background-color: #F8F8F8;">
         <form class="row col-md-8 mb-1" asp-controller="Home" asp-action="CustomerForm" method="post">
             <div class="form-group col-md-12">
-                <label asp-for="Name"><strong>Введіть ім'я</strong></label>
-                <input asp-for="Name" class="form-control">
-                <span asp-validation-for="Name" class="text-danger "></span>
+                <label asp-for="Customer.Name"><strong>Введіть ім'я</strong></label>
+                <input asp-for="Customer.Name" class="form-control">
+                <span asp-validation-for="Customer.Name" class="text-danger "></span>
             </div>
             <div class="form-group col-md-12">
-                <label asp-for="LastName"><strong>Введіть прзівище</strong></label>
-                <input asp-for="LastName" type="text" class="form-control">
-                <span asp-validation-for="LastName" class="text-danger "></span>
+                <label asp-for="Customer.LastName"><strong>Введіть прзівище</strong></label>
+                <input asp-for="Customer.LastName" type="text" class="form-control">
+                <span asp-validation-for="Customer.LastName" class="text-danger "></span>
             </div>
             <div class="form-group col-md-12">
-                <label><strong>Введть адресу</strong></label>
-                <input type="text" class="form-control">
+                <label asp-for="Customer.Email"><strong>Email</strong></label>
+                <input asp-for="Customer.Email" class="form-control">
+                <span asp-validation-for="Customer.Email" class="text-danger "></span>
             </div>
+            
             <div class="form-group col-md-12">
-                <label asp-for="Email"><strong>Email</strong></label>
-                <input asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="text-danger "></span>
+                <div class="custom-control custom-checkbox">
+                    <input asp-for="NeedDelivery" class="custom-control-input" onchange="ChangeDeliveryBlockVisibility()">
+                    <label asp-for="NeedDelivery" class="custom-control-label"><strong>Потрібна доставка</strong></label>
+                </div>
             </div>
+            
+            <div id="deliveryBlock" class="form-group row col-md-12" @if(!Model.NeedDelivery){<text>style="display: none"</text>}>
+                <div class="form-group col-md-6">
+                    <label asp-for="DeliveryInfo.CityId"><strong>Виберіть регіон</strong></label>
+                    <select class="form-control" asp-for="DeliveryInfo.CityId" asp-items="Model.Cities"></select>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="DeliveryInfo.Adress"><strong>Вкажіть адресу</strong></label>
+                    <input asp-for="DeliveryInfo.Adress" class="form-control" placeholder="вул. С.Бандери,2, кв.78">
+                    <span asp-validation-for="DeliveryInfo.Adress" class="text-danger "></span>
+                </div>
+            </div>
+
             <div class="row mb-5">
                 <a asp-controller="Home" asp-action="Index" class="approve ml-3 rounded col-md-1" data-toggle="tooltip" data-placement="bottom" title="Підтвердити і надіслати">
                     <i class="far fa-check-circle"></i>
