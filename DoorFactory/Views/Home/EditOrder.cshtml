@@ -1,0 +1,106 @@
+﻿@model List<DoorFactory.ViewModels.EditDoorOrderViewModel>
+
+    <div class="container">
+        @if (Model.Count != 0)
+        {
+            <h1 class="text-center" style="color: #008b8b"><strong>Вміст корзини</strong></h1>
+            foreach (var doorInfo in Model)
+            {
+                <div class="form-row justify-content-center rounded shadow border border-dark mt-5" style="background-color: #F8F8F8;">
+                    <div class="row col-md-12 mb-2 mt-3">
+                        <div class="form-group col-md-4">
+                            <label asp-for="@doorInfo.Door.Height" class="font-weight-bold">Висота дверей</label>
+                            <input asp-for="@doorInfo.Door.Height" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="@doorInfo.Door.Width"><strong>Ширина дверей</strong></label>
+                            <input asp-for="@doorInfo.Door.Width" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="@doorInfo.Door.Thickness"><strong>Товщина дверей</strong></label>
+                            <input asp-for="@doorInfo.Door.Thickness" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 mb-2">
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.DoorCategory"><strong>Категорія дверей</strong></label>
+                            <input asp-for="@doorInfo.DoorCategory" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.Color"><strong>Колір</strong></label>
+                            <input asp-for="@doorInfo.Color" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.OpeningStyle"><strong>Тип відкриття</strong></label>
+                            <input asp-for="@doorInfo.OpeningStyle" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.StyleType"><strong>Стиль</strong></label>
+                            <input asp-for="@doorInfo.StyleType" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 mb-2">
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.BaseMaterialCategory"><strong>Виберіть тип матеріалу</strong></label>
+                            <input asp-for="@doorInfo.BaseMaterialCategory" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.BaseMaterial"><strong>Виберіть матеріал</strong></label>
+                            <input asp-for="@doorInfo.BaseMaterial" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 mb-2">
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.LockCategory"><strong>Виберіть тип замка</strong></label>
+                            <input asp-for="@doorInfo.LockCategory" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.Lock"><strong>Виберіть замок</strong></label>
+                            <input asp-for="@doorInfo.Lock" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12 mb-2 justify-content-between">
+                        <div class="form-group col-md-4">
+                            <label asp-for="@doorInfo.DoorQuantity"><strong>Кількість</strong></label>
+                            <input asp-for="@doorInfo.DoorQuantity" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="@doorInfo.Door.Price"><strong>Ціна дверей</strong></label>
+                            <input asp-for="@doorInfo.Door.Price" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    @if (@doorInfo.Door.Description != null)
+                    {
+                        <div class="row col-md-12 mb-2 justify-content-between">
+                            <div class="form-group col-md-6">
+                                <label asp-for="@doorInfo.Door.Description"><strong>Побажання</strong></label>
+                                <textarea asp-for="@doorInfo.Door.Description" class="form-control" readonly rows="4" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+                    }
+                    
+                    <div class="row col-md-12 mb-2">
+                        <div class="row col-md-6">
+                            <a asp-action="DeleteItem" asp-controller="Home" asp-route-id="@doorInfo.DoorPosition" class="icon-btn-delete ml-1 rounded col-md-2" data-toggle="tooltip" data-placement="bottom" title="Видалити">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                            <a asp-action="EditDoor" asp-controller="Home" asp-route-id="@doorInfo.DoorPosition" class="icon-btn ml-1 rounded col-md-2 ml-3" data-toggle="tooltip" data-placement="bottom" title="Редагувати">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <a asp-controller="Home" asp-action="CustomerForm" class="icon-btn ml-1 rounded col-md-1 ml-3" data-toggle="tooltip" data-placement="bottom" title="Оформити замовлення">
+                                <i class="fas fa-file-contract"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <h1 class="text-center" style="color: #008b8b"><strong>Ваша корзина порожня</strong></h1>
+        }
+
+    </div>

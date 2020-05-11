@@ -16,21 +16,25 @@ namespace DoorFactory.Services
         private Doors _currentDoor;
         private Customers _customer;
         private OrderDetails _currentOrderDetails;
+        private List<DoorOrderViewModel> _doorVM;
+        private int _editIndex;
 
         public OrderCreator()
         {
             _order = new Orders();
-            _currentDoor=new Doors();
+            _currentDoor=new Doors(); 
             _currentOrderDetails=new OrderDetails();
             _doors =new List<Doors>();
             _orderDetails=new List<OrderDetails>();
             _customer=new Customers();
+            _doorVM = new List<DoorOrderViewModel>();
         }
 
-        public void ResetAllFields()
+        private void ResetAllFields()
         {
             _doors.Clear();
             _orderDetails.Clear();
+            _doorVM.Clear();
             _order = null;
             _currentDoor = null;
             _currentOrderDetails = null;
@@ -53,6 +57,7 @@ namespace DoorFactory.Services
             _doors.Add(_currentDoor);
             _currentOrderDetails = FormOrderDetails(model);
             _orderDetails.Add(_currentOrderDetails);
+            _doorVM.Add(model);
             ResetCurrentFields();
         }
 
@@ -83,12 +88,36 @@ namespace DoorFactory.Services
             ResetAllFields();
         }
 
+        public List<DoorOrderViewModel> GetOrderDoors()
+        {
+            return  _doorVM;
+        }
+
+        public void DeleteItem(int index)
+        {
+            _doors.RemoveAt(index);
+            _orderDetails.RemoveAt(index);
+            _doorVM.RemoveAt(index);
+        }
+
+        public DoorOrderViewModel GetItemToEdit(int index)
+        {
+            _editIndex = index;
+            return _doorVM[index];
+        }
+
+        public void EditItem(DoorOrderViewModel model, DoorsDatabaseContext dbContext)
+        {
+            _doors[_editIndex] = DesignDoor(model, dbContext);
+            _orderDetails[_editIndex] = FormOrderDetails(model);
+            _doorVM[_editIndex]=model;
+        }
+
+
         private Doors DesignDoor(DoorOrderViewModel model, DoorsDatabaseContext dbContext)
         {
             var doorToDesign = model.Door;
             double baseMaterialCount = doorToDesign.Height/100.0 * doorToDesign.Width/100.0 * doorToDesign.Thickness/100.0;
-            //var baseMaterial = dbContext.Materials.Find(model.BaseMaterialID);
-            //var doorLock = dbContext.Materials.Find(model.LockID);
             var baseMaterial = dbContext.Materials.First(m => m.MaterialId == model.BaseMaterialID);
             var doorLock = dbContext.Materials.First(m => m.MaterialId == model.LockID);
             doorToDesign.MaterialsDoor.Add(new MaterialsDoor(){Door = doorToDesign,MaterialId = baseMaterial.MaterialId,CountMaterial = baseMaterialCount});

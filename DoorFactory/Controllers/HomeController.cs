@@ -31,18 +31,6 @@ namespace DoorFactory.Controllers
         [HttpGet]
         public IActionResult OrderDoor()
         {
-            //var order=new Orders()
-            //{
-            //    OrderDate = DateTime.Now,
-            //    PaymentStatus =0,
-            //    PaymentDeadline = DateTime.Now,
-            //    CustomersId = 1,
-            //    EmployeeId = 1,
-            //    OrderTotalPrice = 755
-            //};
-            //order.OrderDetails.Add(new OrderDetails(){DoorQuantity = 2,DoorId = 1});
-            //_dbContext.Orders.Add(order);
-            //_dbContext.SaveChanges();
             var model =new DoorOrderViewModel();
             DoorOrderVMInitializer(model);
             return View(model);
@@ -212,10 +200,70 @@ namespace DoorFactory.Controllers
             {
                 _orderCreator.SetCustomer(model);
                 _orderCreator.CreateOrder(_dbContext);
-                return RedirectToAction("Index");
+                return RedirectToAction("SuccessOrder");
             }
             CustomerDataVMInitializer(model);
             return View(model);
+        }
+
+        public IActionResult EditOrder()
+        {
+            var editModel = new List<EditDoorOrderViewModel>();
+            var doorsInfo = _orderCreator.GetOrderDoors();
+            EditDoorOrderVMInitializer(editModel,doorsInfo);
+            return View(editModel);
+        }
+
+        public IActionResult DeleteItem(int id)
+        {
+            _orderCreator.DeleteItem(id);
+            return RedirectToAction("EditOrder");
+        }
+
+        [HttpGet]
+        public IActionResult EditDoor(int id)
+        {
+            var model = _orderCreator.GetItemToEdit(id);
+            DoorOrderVMInitializer(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditDoor(DoorOrderViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _orderCreator.EditItem(model,_dbContext);
+                return RedirectToAction("EditOrder");
+            }
+            DoorOrderVMInitializer(model);
+            return View(model);
+        }
+
+        private void EditDoorOrderVMInitializer(List<EditDoorOrderViewModel> editModel, List<DoorOrderViewModel> doors)
+        {
+            foreach (var doorInfo in doors)
+            {
+                var x = new EditDoorOrderViewModel
+                {
+                    Door = doorInfo.Door,
+                    Color = _dbContext.Colors.First(c => c.ColorId == doorInfo.Door.ColorId).Name,
+                    BaseMaterial = _dbContext.Materials.First(m => m.MaterialId == doorInfo.BaseMaterialID).Name,
+                    Lock = _dbContext.Materials.First(m => m.MaterialId == doorInfo.LockID).Name,
+                    BaseMaterialCategory = _dbContext.MaterialsCategory
+                        .First(mc => mc.MaterialCategoryId == doorInfo.BaseMaterialCategoryID).Name,
+                    LockCategory = _dbContext.MaterialsCategory
+                        .First(mc => mc.MaterialCategoryId == doorInfo.LockCategoryID).Name,
+                    DoorCategory = _dbContext.DoorCategories
+                        .First(dc => dc.DoorsCategoriesId == doorInfo.Door.DoorsCategoriesId).CategoryName,
+                    OpeningStyle = _dbContext.OpeningStyles
+                        .First(os => os.OpeningStylesId == doorInfo.Door.OpeningStylesId).Name,
+                    StyleType = _dbContext.StyleTypes.First(st => st.StyleTypesId == doorInfo.Door.StyleTypesId).Name,
+                    DoorQuantity = doorInfo.OrderDetails.DoorQuantity,
+                    DoorPosition = doors.IndexOf(doorInfo)
+                };
+                editModel.Add(x);
+            }
         }
 
         private void CustomerDataVMInitializer(CustomerDataViewModel model)
@@ -232,6 +280,11 @@ namespace DoorFactory.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult SuccessOrder()
         {
             return View();
         }

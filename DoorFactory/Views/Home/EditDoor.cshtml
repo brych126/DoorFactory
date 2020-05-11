@@ -1,8 +1,7 @@
 ﻿@model DoorFactory.ViewModels.DoorOrderViewModel
-@inject DoorFactory.Interfaces.IOrderCreator OrderCreator
 
 <div class="container">
-    <form asp-controller="Home" asp-action="OrderDoor" method="post">
+    <form asp-controller="Home" asp-action="EditDoor" method="post">
         <div class="form-row justify-content-center rounded shadow mt-5" style="background-color: #F8F8F8;">
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-4">
@@ -50,7 +49,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="BaseMaterialID"><strong>Виберіть матеріал</strong></label>
-                    <select asp-for="BaseMaterialID" asp-items="Model.BaseMaterials" class="form-control" ></select>
+                    <select asp-for="BaseMaterialID" asp-items="Model.BaseMaterials" class="form-control"></select>
                 </div>
             </div>
             <div class="row col-md-12 mb-2">
@@ -63,14 +62,14 @@
                     <select asp-for="LockID" asp-items="Model.Locks" class="form-control"></select>
                 </div>
             </div>
-            
-        <div class="row col-md-12 mb-2">
-            <div class="form-group col-md-4">
-                <label asp-for="OrderDetails.DoorQuantity" class="font-weight-bold">Скільки дверей бажаєте замовити?</label>
-                <input asp-for="OrderDetails.DoorQuantity" class="form-control">
-                <span asp-validation-for="OrderDetails.DoorQuantity" class="text-danger "></span>
+
+            <div class="row col-md-12 mb-2">
+                <div class="form-group col-md-4">
+                    <label asp-for="OrderDetails.DoorQuantity" class="font-weight-bold">Скільки дверей бажаєте замовити?</label>
+                    <input asp-for="OrderDetails.DoorQuantity" class="form-control">
+                    <span asp-validation-for="OrderDetails.DoorQuantity" class="text-danger "></span>
+                </div>
             </div>
-        </div>
 
             <div class="row col-md-12 mb-2">
                 <div class="form-group col-md-6">
@@ -83,21 +82,12 @@
 
         <div class="row mt-3 mb-5">
             <div class="row col-md-6">
-                <button type="submit" class="ml-1 button-icon icon-btn" data-toggle="tooltip" data-placement="bottom" title="Додати в корзину">
-                    <i class="fas fa-cart-plus"></i>
+                <button type="submit" class="ml-1 button-icon icon-btn" data-toggle="tooltip" data-placement="bottom" title="Зберегти зміни">
+                    <i class="far fa-save"></i>
                 </button>
-
-                <a asp-controller="Home" asp-action="CustomerForm" class="icon-btn ml-1 rounded col-md-2 ml-3" data-toggle="tooltip" data-placement="bottom" title="Оформити замовлення">
-                    <i class="fas fa-file-contract"></i>
-                </a>
-            </div>
-            <div class="row col-md-6 justify-content-end">
                 <a asp-controller="Home" asp-action="EditOrder" class="icon-btn ml-1 rounded col-md-2 pl-5" data-toggle="tooltip" data-placement="bottom" title="Корзина">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fas fa-arrow-circle-left"></i>
                 </a>
-                <div class="mt-5 mr-1 ml-1">
-                    <span class="badge badge-danger">@OrderCreator.GetDoorsCount()</span>
-                </div>
             </div>
         </div>
     </form>
