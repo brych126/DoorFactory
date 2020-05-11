@@ -31,6 +31,18 @@ namespace DoorFactory.Controllers
         [HttpGet]
         public IActionResult OrderDoor()
         {
+            //var order=new Orders()
+            //{
+            //    OrderDate = DateTime.Now,
+            //    PaymentStatus =0,
+            //    PaymentDeadline = DateTime.Now,
+            //    CustomersId = 1,
+            //    EmployeeId = 1,
+            //    OrderTotalPrice = 755
+            //};
+            //order.OrderDetails.Add(new OrderDetails(){DoorQuantity = 2,DoorId = 1});
+            //_dbContext.Orders.Add(order);
+            //_dbContext.SaveChanges();
             var model =new DoorOrderViewModel();
             DoorOrderVMInitializer(model);
             return View(model);
@@ -198,7 +210,9 @@ namespace DoorFactory.Controllers
             }
             if (ModelState.IsValid)
             {
-                return Content("Success");
+                _orderCreator.SetCustomer(model);
+                _orderCreator.CreateOrder(_dbContext);
+                return RedirectToAction("Index");
             }
             CustomerDataVMInitializer(model);
             return View(model);

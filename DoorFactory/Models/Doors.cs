@@ -14,7 +14,7 @@ namespace DoorFactory.Models
 
         public int DoorId { get; set; }
         [Required(ErrorMessage = "Поле 'Ширина' є обовязковим")]
-        [Range(500, 5000,ErrorMessage = "Ширина дверей повинна бути в межах від 0.5 до 5 метрів.")]
+        [Range(500, 1500,ErrorMessage = "Ширина дверей повинна бути в межах від 0.5 до 1.5 метрів.")]
         public int Width { get; set; }
         [Required(ErrorMessage = "Поле 'Висота' є обовязковим")]
         [Range(1500, 3000, ErrorMessage = "Висота дверей повинна бути в межах від 1.5 до 3 метрів.")]

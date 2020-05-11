@@ -14,6 +14,7 @@ namespace DoorFactory.Services
         private List<Doors> _doors;
         private List<OrderDetails> _orderDetails;
         private Doors _currentDoor;
+        private Customers _customer;
         private OrderDetails _currentOrderDetails;
 
         public OrderCreator()
@@ -23,6 +24,7 @@ namespace DoorFactory.Services
             _currentOrderDetails=new OrderDetails();
             _doors =new List<Doors>();
             _orderDetails=new List<OrderDetails>();
+            _customer=new Customers();
         }
 
         public void ResetAllFields()
@@ -32,6 +34,7 @@ namespace DoorFactory.Services
             _order = null;
             _currentDoor = null;
             _currentOrderDetails = null;
+            _customer = null;
         }
 
         private void ResetCurrentFields()
@@ -53,24 +56,48 @@ namespace DoorFactory.Services
             ResetCurrentFields();
         }
 
-        public void SetCustomer()
+        public void SetCustomer(CustomerDataViewModel model)
         {
-            ;
+            _customer = model.Customer;
+            if (model.NeedDelivery)
+            {
+                var deliveryInfo = model.DeliveryInfo;
+                deliveryInfo.Date = DateTime.Now.Add(new TimeSpan(15, 0, 0, 0));
+                deliveryInfo.EmployeeId = 1;
+                deliveryInfo.Status = 0;
+                _order.DelieveryInfo.Add(deliveryInfo);
+            }
         }
 
+        public void CreateOrder(DoorsDatabaseContext dbContext)
+        {
+            var orderSum = _orderDetails.Sum(od => od.Door.Price * od.DoorQuantity);
+            _order.OrderTotalPrice = _order.DelieveryInfo.Count==0 ? orderSum : orderSum + 650;
+            _order.Customers = _customer;
+            _order.EmployeeId = 1;
+            _order.OrderDate=DateTime.Now;
+            _order.PaymentDeadline = _order.OrderDate.Add(new TimeSpan(25, 0, 0, 0));
+            _order.OrderDetails = _orderDetails;
+            dbContext.Orders.Add(_order);
+            dbContext.SaveChanges();
+            ResetAllFields();
+        }
 
         private Doors DesignDoor(DoorOrderViewModel model, DoorsDatabaseContext dbContext)
         {
             var doorToDesign = model.Door;
             double baseMaterialCount = doorToDesign.Height/100.0 * doorToDesign.Width/100.0 * doorToDesign.Thickness/100.0;
-            var baseMaterial = dbContext.Materials.Find(model.BaseMaterialID);
-            var doorLock = dbContext.Materials.Find(model.LockID);
-            doorToDesign.MaterialsDoor.Add(new MaterialsDoor(){Door = doorToDesign,Material = baseMaterial,CountMaterial = baseMaterialCount});
-            doorToDesign.MaterialsDoor.Add(new MaterialsDoor() { Door = doorToDesign, Material = doorLock, CountMaterial = 1});
+            //var baseMaterial = dbContext.Materials.Find(model.BaseMaterialID);
+            //var doorLock = dbContext.Materials.Find(model.LockID);
+            var baseMaterial = dbContext.Materials.First(m => m.MaterialId == model.BaseMaterialID);
+            var doorLock = dbContext.Materials.First(m => m.MaterialId == model.LockID);
+            doorToDesign.MaterialsDoor.Add(new MaterialsDoor(){Door = doorToDesign,MaterialId = baseMaterial.MaterialId,CountMaterial = baseMaterialCount});
+            doorToDesign.MaterialsDoor.Add(new MaterialsDoor() { Door = doorToDesign, MaterialId = doorLock.MaterialId, CountMaterial = 1});
             var doorPrice = baseMaterialCount * (double) baseMaterial.Price + (double) doorLock.Price;
             const double doorRate = 0.42;
             doorToDesign.Price = Decimal.Round((decimal) doorPrice, 2);
             doorToDesign.Rate = doorRate;
+            doorToDesign.DoorName = "Тест";
             return doorToDesign;
         }
 
@@ -80,7 +107,6 @@ namespace DoorFactory.Services
             {
                 DoorQuantity = model.OrderDetails.DoorQuantity,
                 Door = _currentDoor,
-                Order = _order
             };
         }
 

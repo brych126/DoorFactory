@@ -10,7 +10,9 @@ namespace DoorFactory.Interfaces
     public interface IOrderCreator
     {
         void ResetAllFields();
-        void ReadData(DoorOrderViewModel model,DoorsDatabaseContext _dbContext);
+        void ReadData(DoorOrderViewModel model, DoorsDatabaseContext _dbContext);
         int GetDoorsCount();
+        void SetCustomer(CustomerDataViewModel model);
+        void CreateOrder(DoorsDatabaseContext _dbContext);
     }
 }
