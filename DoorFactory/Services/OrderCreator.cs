@@ -109,7 +109,7 @@ namespace DoorFactory.Services
         public void EditItem(DoorOrderViewModel model, DoorsDatabaseContext dbContext)
         {
             _doors[_editIndex] = DesignDoor(model, dbContext);
-            _orderDetails[_editIndex] = FormOrderDetails(model);
+            _orderDetails[_editIndex] = FormEditedOrderDetails(model);
             _doorVM[_editIndex]=model;
         }
 
@@ -136,6 +136,15 @@ namespace DoorFactory.Services
             {
                 DoorQuantity = model.OrderDetails.DoorQuantity,
                 Door = _currentDoor,
+            };
+        }
+
+        private OrderDetails FormEditedOrderDetails(DoorOrderViewModel model)
+        {
+            return new OrderDetails()
+            {
+                DoorQuantity = model.OrderDetails.DoorQuantity,
+                Door = _doors[_editIndex],
             };
         }
 
