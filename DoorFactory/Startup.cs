@@ -30,6 +30,7 @@ namespace DoorFactory
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IOrderCreator, OrderCreator>();
+            services.AddSingleton<ICustomUserManager, CustomUserManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
