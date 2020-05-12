@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,43 +33,28 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 </head>
 <body>
- 
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>DoorFactory</h3>
+                <hr style="border-color: white">
             </div>
 
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a id="Home" data-toggle="collapse" class="dropdown-toggle">Інформація про...</a>
-                    <ul class="list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a asp-controller="Home" asp-action="OrdersInfo">Замовлення</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Home" asp-action="CustomersInfo">Клієнтів</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Home" asp-action="DoorsInfo">Товар</a>
-                        </li>
-                        <li>
-                            <a href="#">Матеріали</a>
-                        </li>
+            <a class="icon-menu ml-1 rounded col-md-2 ml-3" style="width: 100px" data-toggle="tooltip" data-placement="bottom" title="Редагувати">
+                <i class="fas fa-door-closed"></i>
+            </a>
+            
+            <div class="text-center">
+            <a class="icon-menu mr-3 rounded col-md-2 " style="font-size: 60px" data-toggle="tooltip" data-placement="bottom" title="Редагувати">
+                <i class="fas fa-key"></i>
+            </a>
+            </div>
+            <a class="icon-menu ml-1 rounded col-md-2 ml-3" style="width: 100px" data-toggle="tooltip" data-placement="bottom" title="Редагувати">
+                <i class="fas fa-door-open"></i>
+            </a>
 
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Працівники</a>
-                </li>
-                <li>
-                    <a href="#">Доставка замовлень</a>
-                </li>
-                <li>
-                    <a href="#">Статистика</a>
-                </li>
-            </ul>
         </nav>
 
         <!-- Page Content  -->
@@ -73,7 +62,6 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span id="menuSpan">Меню</span>
@@ -85,11 +73,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                         <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="OrderDoor">Зробити замовлення</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Інструкція при оформленні замовлення</a>
+                            <li class="nav-item ml-1">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Головна</a>
                             </li>
                         </ul>
 
@@ -116,7 +101,8 @@
         </div>
     </div>
 
-<environment include="Development">
+
+    <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     </environment>
@@ -145,8 +131,6 @@
 
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>
