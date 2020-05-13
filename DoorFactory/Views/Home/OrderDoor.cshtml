@@ -28,7 +28,10 @@
                     <span asp-validation-for="Door.DoorsCategoriesId" class="text-danger "></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="Door.ColorId"><strong>Колір</strong></label>
+                        <label asp-for="Door.ColorId"><strong>Колір</strong></label>
+                        <a asp-controller="Home" asp-action="Materials" asp-fragment="dtColors" class="icon-help rounded col-md-2 mr-5" data-toggle="tooltip" data-placement="bottom" title="Деталі">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
                     <select asp-for="Door.ColorId" asp-items="Model.Colors" class="form-control"></select>
                     <span asp-validation-for="Door.ColorId" class="text-danger "></span>
                 </div>

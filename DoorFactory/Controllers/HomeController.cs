@@ -273,10 +273,20 @@ namespace DoorFactory.Controllers
             model.Cities = cities;
         }
 
-        public IEnumerable<Materials> GetMaterials(int ID)
+        public IActionResult Materials()
         {
-            var materials = _dbContext.Materials.Where(m=>m.MaterialCategoryId==ID).ToList();
-            return materials;
+            var model= new MaterialsViewModel();
+            var baseMaterials = _dbContext.Materials.Include(m => m.MaterialCategory)
+                .Where(m => m.MaterialCategoryId < 3).ToList();
+            var locks = _dbContext.Materials.Include(m => m.MaterialCategory)
+                .Where(m => m.MaterialCategoryId >= 3).ToList();
+            var colors= _dbContext.Colors.ToList();
+            var colorsCode=new List<string>(){ "#000000", "#FBEC5D", "#645452", "#F0DC82", "#cd7f32", "#964B00", "#F0FFFF", "#3D2B1F", "#2B1700", "	#080808", "#F5F5DC" };
+            model.BaseMaterials = baseMaterials;
+            model.Locks = locks;
+            model.Colors = colors;
+            model.ColorCode=colorsCode;
+            return View(model);
         }
 
         public IActionResult Privacy()
