@@ -45,7 +45,7 @@
             <td>@order.Order.OrderDate.Date.ToString("d")</td>
             <td>@order.Order.PaymentDeadline.Date.ToString("d")</td>
             <td>
-                @if (order.Order.PaymentStatus == 0)
+                @if (order.Order.PaymentStatus == 1)
                 {
                     <text>Оплачено</text>
                 }
