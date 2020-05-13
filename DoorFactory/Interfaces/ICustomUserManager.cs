@@ -9,6 +9,8 @@ namespace DoorFactory.Interfaces
    public interface ICustomUserManager
     {
         bool IsUserLoggedIn();
-        void LogInIntoSystem(Employees employee);
+        void LogIn(Employees user);
+        void LogOut();
+        string GetUserName();
     }
 }

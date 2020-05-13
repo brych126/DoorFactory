@@ -2,7 +2,7 @@
 @{
     Layout = "~/Views/_Master.cshtml";
 }
-
+@model DoorFactory.ViewModels.UserViewModel
 <div class="container">
     <div class="modal-dialog modal-login">
         <div class="modal-content">
@@ -15,12 +15,15 @@
                 <h4 class="modal-title">Вхід в систему</h4>
             </div>
             <div class="modal-body">
-                <form action="/examples/actions/confirmation.php" method="post">
+                <form asp-controller="Account" asp-action="LogInPage" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Ім'я користувача" required="required">
+                        <input asp-for="User.Username" class="form-control" placeholder="Ім'я користувача">
+                        <span asp-validation-for="User.Username" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Пароль" required="required">
+                        <input asp-for="User.Password" class="form-control" placeholder="Пароль">
+                        <span asp-validation-for="User.Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Увійти</button>

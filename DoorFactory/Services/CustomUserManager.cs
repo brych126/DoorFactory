@@ -10,15 +10,27 @@ namespace DoorFactory.Services
     public class CustomUserManager:ICustomUserManager
     {
         private bool _isLoggedIn;
-
+        private Employees _user;
         public bool IsUserLoggedIn()
         {
             return _isLoggedIn;
         }
 
-        public void LogInIntoSystem(Employees employee)
+        public void LogIn(Employees user)
         {
-            throw new NotImplementedException();
+            _user = user;
+            _isLoggedIn = true;
+        }
+
+        public void LogOut()
+        {
+            _user = null;
+            _isLoggedIn = false;
+        }
+
+        public string GetUserName()
+        {
+            return _user.Name;
         }
     }
 }
