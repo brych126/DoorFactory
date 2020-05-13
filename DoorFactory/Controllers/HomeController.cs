@@ -339,6 +339,21 @@ namespace DoorFactory.Controllers
             return RedirectToAction("OrderInfo", new { id = id });
         }
 
+        public IActionResult DeleteOrder(int id)
+        {
+            var order = _dbContext.Orders
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Door)
+                .First(o => o.OrderId == id);
+            foreach (var orderDetail in order.OrderDetails)
+            {
+                _dbContext.Doors.Remove(orderDetail.Door);
+            }
+            _dbContext.Orders.Remove(order);
+            _dbContext.SaveChanges();
+            return RedirectToAction("OrdersInfo");
+        }
+
         public IActionResult Privacy()
         {
             return View();

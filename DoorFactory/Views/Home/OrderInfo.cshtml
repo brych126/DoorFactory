@@ -98,7 +98,7 @@
     </div>
     <div class="row col-md-12 mb-2">
         <div class="row col-md-6">
-            <a class="icon-btn-delete ml-1 rounded col-md-2" data-toggle="tooltip" data-placement="bottom" title="Видалити">
+            <a asp-controller="Home" asp-action="DeleteOrder" asp-route-id="@Model.Order.OrderId" class="icon-btn-delete ml-1 rounded col-md-2" data-toggle="tooltip" data-placement="bottom" title="Видалити">
                 <i class="far fa-trash-alt"></i>
             </a>
             <a asp-controller="Home" asp-action="ChangePaymentStatus" asp-route-id="@Model.Order.OrderId" class="icon-btn ml-1 rounded col-md-2 ml-3" data-toggle="tooltip" data-placement="bottom" title="Змінити статус оплаченості">
