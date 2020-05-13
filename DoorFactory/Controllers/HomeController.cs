@@ -289,6 +289,56 @@ namespace DoorFactory.Controllers
             return View(model);
         }
 
+        public IActionResult OrderInfo(int id)
+        {
+            var order = _dbContext.Orders.Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Door)
+                .ThenInclude(d=>d.StyleTypes)
+                .Include(o=>o.OrderDetails)
+                .ThenInclude(od=>od.Door)
+                .ThenInclude(d=>d.OpeningStyles)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Door)
+                .ThenInclude(d => d.DoorsCategories)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Door)
+                .ThenInclude(d => d.MaterialsDoor)
+                .ThenInclude(md=>md.Material)
+                .ThenInclude(m=>m.MaterialCategory)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Door)
+                .ThenInclude(d => d.Color)
+                .Include(o=>o.Customers)
+                .Include(o=>o.Employee)
+                .Include(o=>o.DelieveryInfo)
+                .First(o => o.OrderId == id);
+            var model=new OrderViewModel()
+            {
+                Order = order,
+                UniqueDoors = order.OrderDetails.Count,
+                DoorsAmount = order.OrderDetails.Sum(od=>od.DoorQuantity)
+            };
+            return View(model);
+        }
+
+        public IActionResult ChangeDeliveryStatus(int id)
+        {
+            var delivery = _dbContext.DelieveryInfo.First(d => d.OrderId == id);
+            delivery.Status = delivery.Status==0 ? (short) 1 : (short) 0;
+            _dbContext.DelieveryInfo.Update(delivery);
+            _dbContext.SaveChanges();
+            return RedirectToAction("OrderInfo",new{id=id});
+        }
+
+        public IActionResult ChangePaymentStatus(int id)
+        {
+            var order = _dbContext.Orders.First(o => o.OrderId == id);
+            order.PaymentStatus = order.PaymentStatus==0 ? (short) 1 : (short) 0;
+            _dbContext.Orders.Update(order);
+            _dbContext.SaveChanges();
+            return RedirectToAction("OrderInfo", new { id = id });
+        }
+
         public IActionResult Privacy()
         {
             return View();

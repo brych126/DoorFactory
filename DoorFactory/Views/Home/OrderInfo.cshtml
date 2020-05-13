@@ -1,0 +1,203 @@
+﻿@model DoorFactory.ViewModels.OrderViewModel
+
+
+<h1 class="text-center" style="color: #008b8b"><strong>Інформація про замовлення</strong></h1>
+<div class="form-row justify-content-center rounded shadow border border-dark mt-3" style="background-color: #F8F8F8;">
+    <div class="row col-md-12 mb-2 mt-3">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.UniqueDoors" class="font-weight-bold">Кількість типів дверей</label>
+            <input asp-for="@Model.UniqueDoors" class="form-control" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.UniqueDoors"><strong>Загальна кількість дверей</strong></label>
+            <input asp-for="@Model.DoorsAmount" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="row col-md-12 mb-2 mt-3">
+        <div class="form-group col-md-6">
+            <label for="od" class="font-weight-bold">Дата замовлення</label>
+            <input id="od" value="@Model.Order.OrderDate.Date.ToString("dd-MM-yyyy")" class="form-control" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="pd"><strong>Крайній термін оплати</strong></label>
+            <input id="pd" value="@Model.Order.PaymentDeadline.Date.ToString("dd-MM-yyyy")" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="row col-md-12 mb-2 mt-3">
+        <div class="form-group col-md-6">
+            <label for="customer" class="font-weight-bold">Покупець</label>
+            <input id="customer" value="@(Model.Order.Customers.Name+" "+Model.Order.Customers.LastName)" class="form-control" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="emp" class="font-weight-bold">Працівник</label>
+            <input id="emp" value="@(Model.Order.Employee.Name+" "+Model.Order.Employee.Surname)" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="row col-md-12 mb-2 mt-3">
+        @if (Model.Order.DelieveryInfo.Count==0)
+        {
+            <div class="form-group col-md-6">
+                @if (Model.Order.PaymentStatus == 0)
+                {
+                    <label for="ps" class="font-weight-bold">Статус оплати</label>
+                    <input id="ps" type="text" value="Не оплачено" class="form-control" readonly>
+                }
+                else
+                {
+                    <label for="ps" class="font-weight-bold">Статус оплати</label>
+                    <input id="ps" type="text" value="Оплачено" class="form-control" readonly>
+                }
+            </div>
+            <div class="form-group col-md-6">
+                <label for="di" class="font-weight-bold">Доставка</label>
+                <input id="di" type="text" value="Не замовлена" class="form-control" readonly>
+            </div>
+        }
+        else
+        {
+            <div class="form-group col-md-4">
+                @if (Model.Order.PaymentStatus == 0)
+                {
+                    <label for="ps" class="font-weight-bold">Статус оплати</label>
+                    <input id="ps" type="text" value="Не оплачено" class="form-control" readonly>
+                }
+                else
+                {
+                    <label for="ps" class="font-weight-bold">Статус оплати</label>
+                    <input id="ps" type="text" value="Оплачено" class="form-control" readonly>
+                }
+            </div>
+            <div class="form-group col-md-4">
+                <label for="di" class="font-weight-bold">Доставка</label>
+                <input id="di" type="text" value="Замовлена" class="form-control" readonly>
+            </div>
+            if (Model.Order.DelieveryInfo.First().Status==0)
+            {
+                <div class="form-group col-md-4">
+                    <label for="dis" class="font-weight-bold">Статус доставки</label>
+                    <input id="dis" type="text" value="Не доставлено" class="form-control" readonly>
+                </div>
+            }
+            else
+            {
+                <div class="form-group col-md-4">
+                    <label for="dis" class="font-weight-bold">Статус доставки</label>
+                    <input id="dis" type="text" value="Доставлено" class="form-control" readonly>
+                </div>
+            }
+        }
+    </div>
+    <div class="row col-md-12 mb-2 mt-3">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Order.OrderTotalPrice" class="font-weight-bold">Сума замовлення</label>
+            <input asp-for="@Model.Order.OrderTotalPrice" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="row col-md-12 mb-2">
+        <div class="row col-md-6">
+            <a class="icon-btn-delete ml-1 rounded col-md-2" data-toggle="tooltip" data-placement="bottom" title="Видалити">
+                <i class="far fa-trash-alt"></i>
+            </a>
+            <a asp-controller="Home" asp-action="ChangePaymentStatus" asp-route-id="@Model.Order.OrderId" class="icon-btn ml-1 rounded col-md-2 ml-3" data-toggle="tooltip" data-placement="bottom" title="Змінити статус оплаченості">
+                <i class="fas fa-piggy-bank"></i>
+            </a>
+            @if (Model.Order.DelieveryInfo.Count!=0)
+            {
+                <a asp-controller="Home" asp-action="ChangeDeliveryStatus" asp-route-id="@Model.Order.OrderId" class="icon-btn ml-1 rounded col-md-1 ml-3" data-toggle="tooltip" data-placement="bottom" title="Змінити статус доставки">
+                    <i class="fas fa-truck"></i>
+                </a>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+
+@if (Model.Order.OrderDetails.Count != 0)
+{
+    <h1 class="text-center mt-5" style="color: #008b8b"><strong>Вміст замовлення</strong></h1>
+    foreach (var orderDetail in Model.Order.OrderDetails)
+    {
+        <div class="form-row justify-content-center rounded shadow border border-dark mt-3" style="background-color: #F8F8F8;">
+            <div class="row col-md-12 mb-2 mt-3">
+                <div class="form-group col-md-4">
+                    <label asp-for="@orderDetail.Door.Height" class="font-weight-bold">Висота дверей</label>
+                    <input asp-for="@orderDetail.Door.Height" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="@orderDetail.Door.Width"><strong>Ширина дверей</strong></label>
+                    <input asp-for="@orderDetail.Door.Width" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="@orderDetail.Door.Thickness"><strong>Товщина дверей</strong></label>
+                    <input asp-for="@orderDetail.Door.Thickness" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row col-md-12 mb-2">
+                <div class="form-group col-md-6">
+                    <label asp-for="@orderDetail.Door.DoorsCategories.CategoryName"><strong>Категорія дверей</strong></label>
+                    <input asp-for="@orderDetail.Door.DoorsCategories.CategoryName" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="@orderDetail.Door.Color.Name"><strong>Колір</strong></label>
+                    <input asp-for="@orderDetail.Door.Color.Name" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="@orderDetail.Door.OpeningStyles.Name"><strong>Тип відкриття</strong></label>
+                    <input asp-for="@orderDetail.Door.OpeningStyles.Name" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="@orderDetail.Door.StyleTypes.Name"><strong>Стиль</strong></label>
+                    <input asp-for="@orderDetail.Door.StyleTypes.Name" class="form-control" readonly>
+                </div>
+            </div>
+            @if (@orderDetail.Door.MaterialsDoor.Count == 2)
+            {
+                <div class="row col-md-12 mb-2">
+                    <div class="form-group col-md-6">
+                        <label asp-for="@orderDetail.Door.MaterialsDoor.Last().Material.MaterialCategory.Name"><strong>Тип матеріалу</strong></label>
+                        <input asp-for="@orderDetail.Door.MaterialsDoor.Last().Material.MaterialCategory.Name" class="form-control" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="@orderDetail.Door.MaterialsDoor.Last().Material.Name"><strong>Матеріал</strong></label>
+                        <input asp-for="@orderDetail.Door.MaterialsDoor.Last().Material.Name" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="row col-md-12 mb-2">
+                    <div class="form-group col-md-6">
+                        <label asp-for="@orderDetail.Door.MaterialsDoor.First().Material.MaterialCategory.Name"><strong>Тип замка</strong></label>
+                        <input asp-for="@orderDetail.Door.MaterialsDoor.First().Material.MaterialCategory.Name" class="form-control" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="@orderDetail.Door.MaterialsDoor.First().Material.Name"><strong>Замок</strong></label>
+                        <input asp-for="@orderDetail.Door.MaterialsDoor.First().Material.Name" class="form-control" readonly>
+                    </div>
+                </div>
+            }
+            <div class="row col-md-12 mb-2 justify-content-between">
+                <div class="form-group col-md-4">
+                    <label asp-for="@orderDetail.DoorQuantity"><strong>Кількість</strong></label>
+                    <input asp-for="@orderDetail.DoorQuantity" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="@orderDetail.Door.Price"><strong>Ціна дверей</strong></label>
+                    <input asp-for="@orderDetail.Door.Price" class="form-control" readonly>
+                </div>
+            </div>
+
+            @if (@orderDetail.Door.Description != null)
+            {
+                <div class="row col-md-12 mb-2 justify-content-between">
+                    <div class="form-group col-md-6">
+                        <label asp-for="@orderDetail.Door.Description"><strong>Побажання</strong></label>
+                        <textarea asp-for="@orderDetail.Door.Description" class="form-control" readonly rows="4" style="resize: none;"></textarea>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
